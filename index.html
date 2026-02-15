@@ -10,159 +10,135 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){try{if(localStorage.getItem("ai-writing-terms-accepted")==="1")document.documentElement.classList.add("terms-accepted");}catch(_){}})();
+  </script>
 </head>
 <body>
   <div class="app">
     <header class="header">
-      <div class="header-badge">Powered by GPT</div>
+      <div class="header-top">
+        <div class="header-badge" id="i18n-badge">Powered by GPT</div>
+        <a href="/membership.html" class="nav-link" data-i18n="membership">Membership</a>
+        <div class="auth-area">
+          <div id="auth-guest" class="auth-guest">
+            <button type="button" class="btn-auth btn-login" id="btn-login" data-i18n="login">Log in</button>
+            <button type="button" class="btn-auth btn-register btn-primary" id="btn-register" data-i18n="register">Register</button>
+          </div>
+          <div id="auth-user" class="auth-user hidden">
+            <button type="button" class="btn-profile" id="btn-profile" aria-haspopup="true" aria-expanded="false" title="Account">
+              <span class="profile-avatar" aria-hidden="true"></span>
+              <span class="profile-email" id="profile-email"></span>
+              <span class="profile-chevron">▾</span>
+            </button>
+            <div id="profile-dropdown" class="profile-dropdown" role="menu" aria-hidden="true">
+              <a href="/membership.html" class="profile-item profile-link" data-i18n="membership">Membership</a>
+              <button type="button" class="profile-item" id="btn-settings" data-i18n="settings">Settings</button>
+              <button type="button" class="profile-item" id="btn-change-password" data-i18n="changePassword">Change password</button>
+              <button type="button" class="profile-item" id="btn-logout" data-i18n="logout">Log out</button>
+            </div>
+          </div>
+        </div>
+        <div class="lang-switcher">
+          <button type="button" class="btn-lang" id="btn-lang-toggle" aria-haspopup="true" aria-expanded="false" title="Change language">
+            <span class="lang-current"></span><span class="lang-chevron">▾</span>
+          </button>
+          <div class="lang-dropdown" id="i18n-btn" role="menu" aria-hidden="true"></div>
+        </div>
+      </div>
       <h1>AI Writing Assistant</h1>
-      <p class="tagline">Your smart companion for clearer, stronger writing — completions, tone shifts, and grammar corrections in one place.</p>
+      <p class="tagline" id="i18n-tagline">Your smart companion for clearer, stronger writing — completions, tone shifts, and grammar corrections in one place.</p>
     </header>
 
     <section class="features" aria-label="Features overview">
       <div class="feature-card feature-complete">
         <span class="feature-icon" aria-hidden="true">→</span>
-        <h3>Complete</h3>
-        <p>Stuck mid-sentence? Get AI suggestions to finish your thought naturally.</p>
+        <h3 data-i18n="complete">Complete</h3>
+        <p data-i18n="completeDesc">Stuck mid-sentence? Get AI suggestions to finish your thought naturally.</p>
       </div>
       <div class="feature-card feature-rewrite">
         <span class="feature-icon" aria-hidden="true">✎</span>
-        <h3>Rewrite</h3>
-        <p>Change tone — formal, casual, concise, or elaborate — without losing meaning.</p>
+        <h3 data-i18n="rewrite">Rewrite</h3>
+        <p data-i18n="rewriteDesc">Change tone — formal, casual, concise, or elaborate — without losing meaning.</p>
       </div>
       <div class="feature-card feature-grammar">
         <span class="feature-icon" aria-hidden="true">✓</span>
-        <h3>Fix Grammar</h3>
-        <p>Clean up spelling, punctuation, and clarity with one click.</p>
+        <h3 data-i18n="grammar">Fix Grammar</h3>
+        <p data-i18n="grammarDesc">Clean up spelling, punctuation, and clarity with one click.</p>
       </div>
       <div class="feature-card feature-summarize">
         <span class="feature-icon" aria-hidden="true">◐</span>
-        <h3>Summarize</h3>
-        <p>Condense long text into a brief summary.</p>
+        <h3 data-i18n="summarize">Summarize</h3>
+        <p data-i18n="summarizeDesc">Condense long text into a brief summary.</p>
       </div>
       <div class="feature-card feature-expand">
         <span class="feature-icon" aria-hidden="true">⊕</span>
-        <h3>Expand</h3>
-        <p>Elaborate on short ideas into fuller paragraphs.</p>
+        <h3 data-i18n="expand">Expand</h3>
+        <p data-i18n="expandDesc">Elaborate on short ideas into fuller paragraphs.</p>
       </div>
       <div class="feature-card feature-bullets">
         <span class="feature-icon" aria-hidden="true">•</span>
-        <h3>Bullets</h3>
-        <p>Convert text to bullet points or vice versa.</p>
+        <h3 data-i18n="bullets">Bullets</h3>
+        <p data-i18n="bulletsDesc">Convert text to bullet points or vice versa.</p>
       </div>
       <div class="feature-card feature-simplify">
         <span class="feature-icon" aria-hidden="true">◇</span>
-        <h3>Simplify</h3>
-        <p>Rewrite complex text in plain, easy-to-read language.</p>
+        <h3 data-i18n="simplify">Simplify</h3>
+        <p data-i18n="simplifyDesc">Rewrite complex text in plain, easy-to-read language.</p>
+      </div>
+      <div class="feature-card feature-paraphrase">
+        <span class="feature-icon" aria-hidden="true">〃</span>
+        <h3 data-i18n="paraphrase">Paraphrase</h3>
+        <p data-i18n="paraphraseDesc">Rephrase text in your own words while keeping the same meaning and intent.</p>
+      </div>
+      <div class="feature-card feature-outline">
+        <span class="feature-icon" aria-hidden="true">≡</span>
+        <h3 data-i18n="outline">Outline</h3>
+        <p data-i18n="outlineDesc">Generate a structured outline from your draft to organize ideas and flow.</p>
       </div>
     </section>
 
     <details class="how-to" open>
-      <summary>How to use</summary>
+      <summary data-i18n="howTo">How to use</summary>
       <div class="how-to-content">
         <ol>
-          <li><strong>Complete:</strong> Type some text, then click <em>Complete</em>. The AI suggests the next few words.</li>
-          <li><strong>Rewrite:</strong> Choose a tone and click <em>Rewrite</em>. Select text first to rewrite only that part.</li>
-          <li><strong>Fix Grammar:</strong> Select text (or use all) and click <em>Fix Grammar</em>.</li>
-          <li><strong>Summarize:</strong> Condense long text into a brief summary. <strong>Expand:</strong> Turn short points into fuller text.</li>
-          <li><strong>Bullets:</strong> Convert paragraphs to bullet points, or bullet points to prose. <strong>Simplify:</strong> Rewrite in plain language.</li>
+          <li><span data-i18n="howTo1">Complete: Type some text, then click Complete. The AI suggests the next few words.</span></li>
+          <li><span data-i18n="howTo2">Rewrite: Choose a tone and click Rewrite. Select text first to rewrite only that part.</span></li>
+          <li><span data-i18n="howTo3">Fix Grammar: Select text (or use all) and click Fix Grammar.</span></li>
+          <li><span data-i18n="howTo4">Summarize: Condense long text. Expand: Turn short points into fuller text.</span></li>
+          <li><span data-i18n="howTo5">Bullets: Convert paragraphs to bullet points, or bullet points to prose. Simplify: Rewrite in plain language.</span></li>
+          <li><span data-i18n="howTo6">Paraphrase: Rephrase text in different words. Outline: Extract key points into a structured outline.</span></li>
         </ol>
-        <p class="tip">💡 <strong>Tip:</strong> Hover over the tone dropdown to see all options at once.</p>
+        <p class="tip">💡 <span data-i18n="tip">Tip: Hover over the tone dropdown to see all options at once.</span></p>
       </div>
     </details>
-
-    <section id="pricing" class="pricing" aria-label="Pricing plans">
-      <h2 class="pricing-title">Plans</h2>
-      <p class="pricing-subtitle">Secure payment via Stripe. Card details are encrypted and never stored on our servers.</p>
-      <details class="stripe-help">
-        <summary>Where do I get my Stripe secret key?</summary>
-        <div class="stripe-help-content">
-          <ol>
-            <li>Go to <a href="https://dashboard.stripe.com/register" target="_blank" rel="noopener">Stripe Dashboard</a></li>
-            <li>Create an account (or sign in)</li>
-            <li>Click <strong>Developers → API keys</strong> in the sidebar</li>
-            <li>Copy the <strong>Secret key</strong> (starts with <code>sk_test_</code> for testing)</li>
-            <li>Add to your <code>.env</code> file: <code>STRIPE_SECRET_KEY=sk_test_...</code></li>
-          </ol>
-        </div>
-      </details>
-      <div class="pricing-grid">
-        <div class="plan-card plan-free">
-          <h3>Free</h3>
-          <p class="plan-price"><span class="amount">$0</span><span class="period">/month</span></p>
-          <ul class="plan-features">
-            <li>20 completions per day</li>
-            <li>Complete, Rewrite & Grammar</li>
-            <li>All tones</li>
-          </ul>
-          <button type="button" class="plan-cta btn-plan-free" id="btn-use-free">Get started</button>
-        </div>
-        <div class="plan-card">
-          <h3>Starter</h3>
-          <p class="plan-price"><span class="amount">$6</span><span class="period">/month</span></p>
-          <ul class="plan-features">
-            <li>300 completions per month</li>
-            <li>All features included</li>
-            <li>Cancel anytime</li>
-          </ul>
-          <button type="button" class="plan-cta btn-plan" data-plan="starter">Subscribe</button>
-        </div>
-        <div class="plan-card plan-popular">
-          <span class="popular-badge">Popular</span>
-          <h3>Pro</h3>
-          <p class="plan-price"><span class="amount">$12</span><span class="period">/month</span></p>
-          <ul class="plan-features">
-            <li>1,500 completions per month</li>
-            <li>All features included</li>
-            <li>Best value</li>
-          </ul>
-          <button type="button" class="plan-cta btn-plan btn-plan-primary" data-plan="pro">Subscribe</button>
-        </div>
-        <div class="plan-card">
-          <h3>Team</h3>
-          <p class="plan-price"><span class="amount">$24</span><span class="period">/month</span></p>
-          <ul class="plan-features">
-            <li>Unlimited completions</li>
-            <li>Priority support</li>
-            <li>For teams & power users</li>
-          </ul>
-          <button type="button" class="plan-cta btn-plan" data-plan="team">Subscribe</button>
-        </div>
-      </div>
-    </section>
 
     <div class="editor-section">
       <div class="toolbar">
         <div class="toolbar-row">
-          <button type="button" class="btn btn-primary" id="btn-complete" title="Suggest next words">
-            <span class="btn-icon">→</span> Complete
+          <button type="button" class="btn btn-primary" id="btn-complete" data-i18n-title="typeText">
+            <span class="btn-icon">→</span><span data-i18n="complete">Complete</span>
           </button>
           <select id="tone-select" class="select" aria-label="Choose rewrite tone">
-            <option value="formal">Formal</option>
-            <option value="casual">Casual</option>
-            <option value="concise">Concise</option>
-            <option value="elaborate">Elaborate</option>
+            <option value="formal" data-i18n="formal">Formal</option>
+            <option value="casual" data-i18n="casual">Casual</option>
+            <option value="concise" data-i18n="concise">Concise</option>
+            <option value="elaborate" data-i18n="elaborate">Elaborate</option>
           </select>
-          <button type="button" class="btn" id="btn-rewrite" title="Rewrite selection or full text">
-            <span class="btn-icon">✎</span> Rewrite
+          <button type="button" class="btn" id="btn-rewrite" data-i18n-title="selectText">
+            <span class="btn-icon">✎</span><span data-i18n="rewrite">Rewrite</span>
           </button>
-          <button type="button" class="btn" id="btn-grammar" title="Fix grammar and spelling">
-            <span class="btn-icon">✓</span> Fix Grammar
+          <button type="button" class="btn" id="btn-grammar" data-i18n-title="grammar">
+            <span class="btn-icon">✓</span><span data-i18n="grammar">Fix Grammar</span>
           </button>
         </div>
         <div class="toolbar-row toolbar-more">
-          <button type="button" class="btn btn-tool" id="btn-summarize" title="Summarize text">
-            <span class="btn-icon">◐</span> Summarize
-          </button>
-          <button type="button" class="btn btn-tool" id="btn-expand" title="Expand into more detail">
-            <span class="btn-icon">⊕</span> Expand
-          </button>
-          <button type="button" class="btn btn-tool" id="btn-bullets" title="Convert to/from bullet points">
-            <span class="btn-icon">•</span> Bullets
-          </button>
-          <button type="button" class="btn btn-tool" id="btn-simplify" title="Simplify language">
-            <span class="btn-icon">◇</span> Simplify
-          </button>
+          <button type="button" class="btn btn-tool" id="btn-summarize"><span class="btn-icon">◐</span><span data-i18n="summarize">Summarize</span></button>
+          <button type="button" class="btn btn-tool" id="btn-expand"><span class="btn-icon">⊕</span><span data-i18n="expand">Expand</span></button>
+          <button type="button" class="btn btn-tool" id="btn-bullets"><span class="btn-icon">•</span><span data-i18n="bullets">Bullets</span></button>
+          <button type="button" class="btn btn-tool" id="btn-simplify"><span class="btn-icon">◇</span><span data-i18n="simplify">Simplify</span></button>
+          <button type="button" class="btn btn-tool" id="btn-paraphrase"><span class="btn-icon">〃</span><span data-i18n="paraphrase">Paraphrase</span></button>
+          <button type="button" class="btn btn-tool" id="btn-outline"><span class="btn-icon">≡</span><span data-i18n="outline">Outline</span></button>
         </div>
       </div>
 
@@ -178,13 +154,151 @@
       </main>
 
       <footer class="footer">
-        <span id="status" class="status">Ready</span>
+        <span id="status" class="status" data-i18n="ready">Ready</span>
+        <span id="plan-badge" class="plan-badge hidden"></span>
         <span id="char-count" class="char-count">0 characters</span>
       </footer>
     </div>
   </div>
 
+  <!-- Auth modal (login / register) -->
+  <div id="auth-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal auth-modal">
+      <h2 id="auth-title" class="auth-title" data-i18n="login">Log in</h2>
+      <form id="auth-form" class="auth-form">
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab active" data-tab="login" data-i18n="login">Log in</button>
+          <button type="button" class="auth-tab" data-tab="register" data-i18n="register">Register</button>
+        </div>
+        <input type="email" id="auth-email" class="input" placeholder="Email" required data-i18n-placeholder="email" autocomplete="email">
+        <input type="password" id="auth-password" class="input" placeholder="Password" required data-i18n-placeholder="password" autocomplete="current-password">
+        <div id="auth-confirm-wrap" class="auth-confirm-wrap hidden">
+          <input type="password" id="auth-confirm" class="input" placeholder="Confirm password" data-i18n-placeholder="confirmPassword" autocomplete="new-password">
+        </div>
+        <p id="auth-error" class="auth-error hidden"></p>
+        <button type="submit" class="btn btn-primary btn-block" id="auth-submit" data-i18n="login">Log in</button>
+      </form>
+      <button type="button" class="modal-close" id="auth-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+
+  <!-- Rate limit modal (free plan) -->
+  <div id="rate-limit-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="rate-limit-title">
+    <div class="modal rate-limit-modal">
+      <h2 id="rate-limit-title" data-i18n="rateLimitTitle">Daily limit reached</h2>
+      <p class="rate-limit-msg" data-i18n="rateLimitMessage">You've used your 20 free completions for today. Create an account or log in to subscribe for more.</p>
+      <div class="rate-limit-actions">
+        <button type="button" class="btn btn-primary" id="rate-limit-register" data-i18n="register">Register</button>
+        <button type="button" class="btn" id="rate-limit-login" data-i18n="login">Log in</button>
+        <a href="/membership.html" class="btn btn-outline" data-i18n="membership">Membership</a>
+      </div>
+      <button type="button" class="modal-close" id="rate-limit-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div id="settings-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="modal settings-modal settings-modal-wide">
+      <h2 id="settings-title" data-i18n="accountSettings">Account settings</h2>
+      <div class="settings-content">
+        <p class="settings-row"><strong data-i18n="email">Email</strong>: <span id="settings-email"></span> <span id="settings-email-badge" class="verified-badge"></span></p>
+        <div class="settings-section">
+          <h3 class="settings-subtitle" data-i18n="changeEmail">Change email</h3>
+          <form id="change-email-form" class="settings-form">
+            <input type="email" id="change-email-new" class="input" placeholder="New email" data-i18n-placeholder="newEmail">
+            <input type="password" id="change-email-password" class="input" placeholder="Password" data-i18n-placeholder="password" autocomplete="current-password">
+            <p id="change-email-error" class="auth-error hidden"></p>
+            <p id="change-email-success" class="auth-success hidden"></p>
+            <button type="submit" class="btn btn-primary" data-i18n="save">Save</button>
+          </form>
+        </div>
+        <a href="/membership.html" class="settings-link" data-i18n="membership">Membership →</a>
+        <div class="settings-section">
+          <h3 class="settings-subtitle" data-i18n="verifyOwnership">Verify ownership</h3>
+          <p class="settings-desc" data-i18n="verifyDesc">Verify your email and phone to prove account ownership.</p>
+          <div class="settings-verify-row">
+            <span data-i18n="email">Email</span>
+            <span id="verify-email-status" class="verify-status"></span>
+            <button type="button" class="btn btn-small" id="btn-request-email-code" data-i18n="sendCode">Send code</button>
+          </div>
+          <div id="verify-email-flow" class="verify-flow hidden">
+            <input type="text" id="verify-email-code" class="input input-inline" placeholder="Code" maxlength="6">
+            <button type="button" class="btn btn-small" id="btn-verify-email" data-i18n="verify">Verify</button>
+          </div>
+          <div class="settings-verify-row">
+            <input type="tel" id="settings-phone" class="input input-inline" placeholder="Phone number" data-i18n-placeholder="phoneNumber">
+            <span id="verify-phone-status" class="verify-status"></span>
+            <button type="button" class="btn btn-small" id="btn-request-phone-code" data-i18n="sendCode">Send code</button>
+          </div>
+          <div id="verify-phone-flow" class="verify-flow hidden">
+            <input type="text" id="verify-phone-code" class="input input-inline" placeholder="Code" maxlength="6">
+            <button type="button" class="btn btn-small" id="btn-verify-phone" data-i18n="verify">Verify</button>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 class="settings-subtitle" data-i18n="twoFactor">Two-factor authentication</h3>
+          <p id="settings-2fa-status" class="settings-desc"></p>
+          <div id="settings-2fa-setup" class="hidden">
+            <p class="settings-desc" data-i18n="2faSetupDesc">Scan the QR code with an authenticator app (Google Authenticator, Authy, etc.):</p>
+            <img id="2fa-qr" src="" alt="QR code" class="qr-code">
+            <p class="settings-desc" data-i18n="2faManualDesc">Or enter this secret manually:</p>
+            <code id="2fa-secret"></code>
+            <input type="text" id="2fa-code" class="input" placeholder="Enter 6-digit code" maxlength="6" data-i18n-placeholder="enter2FACode">
+            <button type="button" class="btn btn-primary" id="btn-enable-2fa" data-i18n="enable2FA">Enable 2FA</button>
+          </div>
+          <div id="settings-2fa-actions">
+            <button type="button" class="btn" id="btn-setup-2fa" data-i18n="setup2FA">Setup 2FA</button>
+            <div id="settings-2fa-disable" class="hidden">
+              <input type="text" id="2fa-disable-code" class="input input-inline" placeholder="2FA code" maxlength="6">
+              <input type="password" id="2fa-disable-password" class="input input-inline" placeholder="Password" data-i18n-placeholder="password">
+              <button type="button" class="btn" id="btn-disable-2fa" data-i18n="disable2FA">Disable 2FA</button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 class="settings-subtitle" data-i18n="changePassword">Change password</h3>
+          <form id="change-password-form" class="settings-form">
+            <input type="password" id="change-pw-current" class="input" placeholder="Current password" data-i18n-placeholder="currentPassword" autocomplete="current-password">
+            <input type="password" id="change-pw-new" class="input" placeholder="New password" data-i18n-placeholder="newPassword" autocomplete="new-password">
+            <input type="password" id="change-pw-confirm" class="input" placeholder="Confirm new password" data-i18n-placeholder="confirmNewPassword" autocomplete="new-password">
+            <p id="change-pw-error" class="auth-error hidden"></p>
+            <p id="change-pw-success" class="auth-success hidden"></p>
+            <button type="submit" class="btn btn-primary" id="change-pw-submit" data-i18n="save">Save</button>
+          </form>
+        </div>
+      </div>
+      <button type="button" class="modal-close" id="settings-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+
+  <!-- 2FA verification step during login -->
+  <div id="auth-2fa-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal auth-modal">
+      <h2 data-i18n="enter2FACode">Enter 2FA code</h2>
+      <form id="auth-2fa-form">
+        <input type="text" id="auth-2fa-code" class="input" placeholder="6-digit code" maxlength="6" autocomplete="one-time-code">
+        <p id="auth-2fa-error" class="auth-error hidden"></p>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="verify">Verify</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Terms & conditions popup -->
+  <div id="terms-overlay" class="terms-overlay" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+    <div class="terms-modal">
+      <h2 id="terms-title" data-i18n="termsTitle">Accept our terms</h2>
+      <p data-i18n="termsBody">By using our AI Writing Assistant you accept our conditions of use, including our privacy policy and cookie policy. We use cookies to improve your experience and to enforce fair usage limits.</p>
+      <p id="terms-deny-msg" class="terms-deny-msg hidden" data-i18n="termsDeny">You must accept our terms to use the AI Writing Assistant.</p>
+      <div class="terms-actions">
+        <button type="button" id="btn-accept-terms" class="btn btn-primary" data-i18n="accept">Accept</button>
+        <button type="button" id="btn-deny-terms" class="btn btn-denial" data-i18n="deny">Deny</button>
+      </div>
+    </div>
+  </div>
+
   <script src="config.js"></script>
+  <script src="i18n.js"></script>
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

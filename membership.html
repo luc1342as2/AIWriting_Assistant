@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0b0f">
+  <title>Membership — AI Writing Assistant</title>
+  <meta name="description" content="Choose your plan. Free, Starter, Pro, or Team — pick the right membership for your writing needs.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){try{if(localStorage.getItem("ai-writing-terms-accepted")==="1")document.documentElement.classList.add("terms-accepted");}catch(_){}})();
+  </script>
+  <style>
+    .membership-page { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .membership-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .membership-nav a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .membership-nav a:hover { text-decoration: underline; }
+    .membership-title { font-size: 1.5rem; margin: 0; font-weight: 600; }
+    .pricing-section { padding: 2rem 0; }
+    .membership-status { margin-top: 1rem; font-size: 0.9rem; }
+    .membership-status.error { color: var(--error); }
+    .plan-cta.btn-plan-free { display: block; text-align: center; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="membership-page">
+    <nav class="membership-nav">
+      <a href="/" id="link-back" data-i18n="backToEditor">← Back to editor</a>
+      <h1 class="membership-title" data-i18n="membership">Membership</h1>
+      <div class="lang-switcher">
+        <button type="button" class="btn-lang" id="btn-lang-toggle" aria-haspopup="true" aria-expanded="false">
+          <span class="lang-current"></span><span class="lang-chevron">▾</span>
+        </button>
+        <div class="lang-dropdown" id="i18n-btn" role="menu" aria-hidden="true"></div>
+      </div>
+    </nav>
+
+    <section id="pricing" class="pricing pricing-section" aria-label="Pricing plans">
+      <h2 class="pricing-title" data-i18n="plans">Plans</h2>
+      <p class="pricing-subtitle" data-i18n="pricingSub">Secure payment via Stripe. Card details are encrypted and never stored on our servers. Cancel anytime. Refunds available within 30 days.</p>
+      <div class="pricing-grid">
+        <div class="plan-card plan-free">
+          <h3 data-i18n="free">Free</h3>
+          <p class="plan-price"><span class="amount">$0</span><span class="period" data-i18n="perMonth">/month</span></p>
+          <ul class="plan-features">
+            <li data-i18n="free1">20 completions per day</li>
+            <li data-i18n="free2">Complete, Rewrite & Grammar</li>
+            <li data-i18n="free3">All tones</li>
+          </ul>
+          <a href="/" class="plan-cta btn-plan-free" id="btn-use-free" data-i18n="getStarted">Get started</a>
+        </div>
+        <div class="plan-card" data-plan="starter">
+          <h3 data-i18n="starter">Starter</h3>
+          <p class="plan-price"><span class="amount">$6</span><span class="period" data-i18n="perMonth">/month</span></p>
+          <ul class="plan-features">
+            <li data-i18n="starter1">300 completions per month</li>
+            <li data-i18n="starter2">All features included</li>
+            <li data-i18n="starter3">Cancel anytime · Refund within 30 days</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan" data-plan="starter" data-i18n="subscribe">Subscribe</button>
+        </div>
+        <div class="plan-card plan-popular" data-plan="pro">
+          <span class="popular-badge" data-i18n="popular">Popular</span>
+          <h3 data-i18n="pro">Pro</h3>
+          <p class="plan-price"><span class="amount">$12</span><span class="period" data-i18n="perMonth">/month</span></p>
+          <ul class="plan-features">
+            <li data-i18n="pro1">1,500 completions per month</li>
+            <li data-i18n="pro2">All features included</li>
+            <li data-i18n="pro3">Best value · Cancel anytime</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan btn-plan-primary" data-plan="pro" data-i18n="subscribe">Subscribe</button>
+        </div>
+        <div class="plan-card" data-plan="team">
+          <h3 data-i18n="team">Team</h3>
+          <p class="plan-price"><span class="amount">$24</span><span class="period" data-i18n="perMonth">/month</span></p>
+          <ul class="plan-features">
+            <li data-i18n="team1">Unlimited completions</li>
+            <li data-i18n="team2">Priority support</li>
+            <li data-i18n="team3">For teams & power users · Cancel anytime</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan" data-plan="team" data-i18n="subscribe">Subscribe</button>
+        </div>
+      </div>
+    </section>
+    <p id="membership-status" class="membership-status hidden"></p>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="i18n.js"></script>
+  <script src="membership.js"></script>
+</body>
+</html>

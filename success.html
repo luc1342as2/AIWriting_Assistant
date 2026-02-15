@@ -12,9 +12,16 @@
     .success-page { text-align: center; padding: 3rem 1.5rem; max-width: 420px; margin: 0 auto; }
     .success-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--success); }
     .success-page h1 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-    .success-page p { color: var(--text-muted); margin: 0 0 1.5rem; }
-    .success-page a { display: inline-block; padding: 0.6rem 1.25rem; background: var(--primary); color: var(--bg); border-radius: var(--radius-sm); font-weight: 500; text-decoration: none; transition: background 0.2s; }
-    .success-page a:hover { background: var(--primary-hover); }
+    .success-page p { color: var(--text-muted); margin: 0 0 1rem; }
+    .success-page .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin: 1.5rem 0; }
+    .success-page a, .success-page button { display: inline-block; padding: 0.6rem 1.25rem; border-radius: var(--radius-sm); font-weight: 500; text-decoration: none; transition: background 0.2s; font-family: inherit; font-size: 0.95rem; cursor: pointer; border: none; }
+    .success-page a.btn-primary, .success-page button.btn-primary { background: var(--primary); color: var(--bg); }
+    .success-page a.btn-primary:hover, .success-page button.btn-primary:hover { background: var(--primary-hover); }
+    .success-page a.btn-secondary, .success-page button.btn-secondary { background: var(--surface); color: var(--text); }
+    .success-page a.btn-secondary:hover, .success-page button.btn-secondary:hover { background: var(--border); }
+    .success-page .refund-policy { font-size: 0.85rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .success-page .refund-policy strong { color: var(--text); }
+    .success-page .error { color: var(--error); font-size: 0.9rem; margin-top: 0.5rem; }
   </style>
 </head>
 <body>
@@ -22,7 +29,70 @@
     <div class="success-icon" aria-hidden="true">✓</div>
     <h1>Payment successful</h1>
     <p>Thank you for subscribing. Your plan is now active. You can start using all features right away.</p>
-    <a href="/">Back to editor</a>
+    <div class="actions">
+      <a href="#" class="btn-primary" id="link-back">Back to editor</a>
+      <button type="button" class="btn-secondary" id="btn-manage-subscription">Manage subscription</button>
+    </div>
+    <p class="refund-policy"><strong>Cancel anytime.</strong> Refunds available within 30 days of purchase. Use "Manage subscription" to cancel or update your plan.</p>
+    <p id="portal-error" class="error hidden"></p>
   </div>
+  <script src="config.js"></script>
+  <script>
+    (function() {
+      const btn = document.getElementById("btn-manage-subscription");
+      const errEl = document.getElementById("portal-error");
+      const sessionId = new URLSearchParams(window.location.search).get("session_id");
+      function apiBase() { return (window.API_BASE || "").replace(/\/$/, ""); }
+      if (!sessionId) {
+        btn.style.display = "none";
+        document.getElementById("link-back").href = "/";
+      } else {
+        const backLink = document.getElementById("link-back");
+        backLink.textContent = "Activating...";
+        backLink.style.pointerEvents = "none";
+        fetch(apiBase() + "/api/register-subscription", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ session_id: sessionId }),
+          credentials: "include"
+        }).finally(() => {
+          backLink.textContent = "Back to editor";
+          backLink.style.pointerEvents = "";
+          backLink.href = "/";
+        });
+      }
+      btn.addEventListener("click", async function() {
+        if (!sessionId) {
+          errEl.textContent = "Session not found. Use the link from your confirmation email to manage your subscription.";
+          errEl.classList.remove("hidden");
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = "Loading...";
+        errEl.classList.add("hidden");
+        try {
+          const res = await fetch(apiBase() + "/api/create-portal-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ session_id: sessionId }),
+            credentials: "include"
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error || "Could not open portal");
+          if (data.url) {
+            window.location.href = data.url;
+            return;
+          }
+          throw new Error("No portal URL received");
+        } catch (e) {
+          errEl.textContent = e.message || "Something went wrong";
+          errEl.classList.remove("hidden");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Manage subscription";
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
