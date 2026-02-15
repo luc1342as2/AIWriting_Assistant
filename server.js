@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import OpenAI from "openai";
 import Stripe from "stripe";
 import dotenv from "dotenv";
@@ -10,8 +11,9 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SITE_URL = process.env.SITE_URL || `http://localhost:${PORT}`;
+const SITE_URL = process.env.SITE_URL || process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
