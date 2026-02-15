@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Writing Assistant — Smart Completions & Rewrites</title>
+  <meta name="description" content="An AI-powered writing assistant that completes your thoughts, rewrites in different tones, and fixes grammar — all in one place.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-badge">Powered by GPT</div>
+      <h1>AI Writing Assistant</h1>
+      <p class="tagline">Your smart companion for clearer, stronger writing — completions, tone shifts, and grammar corrections in one place.</p>
+    </header>
+
+    <section class="features" aria-label="Features overview">
+      <div class="feature-card feature-complete">
+        <span class="feature-icon" aria-hidden="true">→</span>
+        <h3>Complete</h3>
+        <p>Stuck mid-sentence? Get AI suggestions to finish your thought naturally.</p>
+      </div>
+      <div class="feature-card feature-rewrite">
+        <span class="feature-icon" aria-hidden="true">✎</span>
+        <h3>Rewrite</h3>
+        <p>Change tone — formal, casual, concise, or elaborate — without losing meaning.</p>
+      </div>
+      <div class="feature-card feature-grammar">
+        <span class="feature-icon" aria-hidden="true">✓</span>
+        <h3>Fix Grammar</h3>
+        <p>Clean up spelling, punctuation, and clarity with one click.</p>
+      </div>
+      <div class="feature-card feature-summarize">
+        <span class="feature-icon" aria-hidden="true">◐</span>
+        <h3>Summarize</h3>
+        <p>Condense long text into a brief summary.</p>
+      </div>
+      <div class="feature-card feature-expand">
+        <span class="feature-icon" aria-hidden="true">⊕</span>
+        <h3>Expand</h3>
+        <p>Elaborate on short ideas into fuller paragraphs.</p>
+      </div>
+      <div class="feature-card feature-bullets">
+        <span class="feature-icon" aria-hidden="true">•</span>
+        <h3>Bullets</h3>
+        <p>Convert text to bullet points or vice versa.</p>
+      </div>
+      <div class="feature-card feature-simplify">
+        <span class="feature-icon" aria-hidden="true">◇</span>
+        <h3>Simplify</h3>
+        <p>Rewrite complex text in plain, easy-to-read language.</p>
+      </div>
+    </section>
+
+    <details class="how-to" open>
+      <summary>How to use</summary>
+      <div class="how-to-content">
+        <ol>
+          <li><strong>Complete:</strong> Type some text, then click <em>Complete</em>. The AI suggests the next few words.</li>
+          <li><strong>Rewrite:</strong> Choose a tone and click <em>Rewrite</em>. Select text first to rewrite only that part.</li>
+          <li><strong>Fix Grammar:</strong> Select text (or use all) and click <em>Fix Grammar</em>.</li>
+          <li><strong>Summarize:</strong> Condense long text into a brief summary. <strong>Expand:</strong> Turn short points into fuller text.</li>
+          <li><strong>Bullets:</strong> Convert paragraphs to bullet points, or bullet points to prose. <strong>Simplify:</strong> Rewrite in plain language.</li>
+        </ol>
+        <p class="tip">💡 <strong>Tip:</strong> Hover over the tone dropdown to see all options at once.</p>
+      </div>
+    </details>
+
+    <section id="pricing" class="pricing" aria-label="Pricing plans">
+      <h2 class="pricing-title">Plans</h2>
+      <p class="pricing-subtitle">Secure payment via Stripe. Card details are encrypted and never stored on our servers.</p>
+      <details class="stripe-help">
+        <summary>Where do I get my Stripe secret key?</summary>
+        <div class="stripe-help-content">
+          <ol>
+            <li>Go to <a href="https://dashboard.stripe.com/register" target="_blank" rel="noopener">Stripe Dashboard</a></li>
+            <li>Create an account (or sign in)</li>
+            <li>Click <strong>Developers → API keys</strong> in the sidebar</li>
+            <li>Copy the <strong>Secret key</strong> (starts with <code>sk_test_</code> for testing)</li>
+            <li>Add to your <code>.env</code> file: <code>STRIPE_SECRET_KEY=sk_test_...</code></li>
+          </ol>
+        </div>
+      </details>
+      <div class="pricing-grid">
+        <div class="plan-card plan-free">
+          <h3>Free</h3>
+          <p class="plan-price"><span class="amount">$0</span><span class="period">/month</span></p>
+          <ul class="plan-features">
+            <li>20 completions per day</li>
+            <li>Complete, Rewrite & Grammar</li>
+            <li>All tones</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan-free" id="btn-use-free">Get started</button>
+        </div>
+        <div class="plan-card">
+          <h3>Starter</h3>
+          <p class="plan-price"><span class="amount">$6</span><span class="period">/month</span></p>
+          <ul class="plan-features">
+            <li>300 completions per month</li>
+            <li>All features included</li>
+            <li>Cancel anytime</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan" data-plan="starter">Subscribe</button>
+        </div>
+        <div class="plan-card plan-popular">
+          <span class="popular-badge">Popular</span>
+          <h3>Pro</h3>
+          <p class="plan-price"><span class="amount">$12</span><span class="period">/month</span></p>
+          <ul class="plan-features">
+            <li>1,500 completions per month</li>
+            <li>All features included</li>
+            <li>Best value</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan btn-plan-primary" data-plan="pro">Subscribe</button>
+        </div>
+        <div class="plan-card">
+          <h3>Team</h3>
+          <p class="plan-price"><span class="amount">$24</span><span class="period">/month</span></p>
+          <ul class="plan-features">
+            <li>Unlimited completions</li>
+            <li>Priority support</li>
+            <li>For teams & power users</li>
+          </ul>
+          <button type="button" class="plan-cta btn-plan" data-plan="team">Subscribe</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="editor-section">
+      <div class="toolbar">
+        <div class="toolbar-row">
+          <button type="button" class="btn btn-primary" id="btn-complete" title="Suggest next words">
+            <span class="btn-icon">→</span> Complete
+          </button>
+          <select id="tone-select" class="select" aria-label="Choose rewrite tone">
+            <option value="formal">Formal</option>
+            <option value="casual">Casual</option>
+            <option value="concise">Concise</option>
+            <option value="elaborate">Elaborate</option>
+          </select>
+          <button type="button" class="btn" id="btn-rewrite" title="Rewrite selection or full text">
+            <span class="btn-icon">✎</span> Rewrite
+          </button>
+          <button type="button" class="btn" id="btn-grammar" title="Fix grammar and spelling">
+            <span class="btn-icon">✓</span> Fix Grammar
+          </button>
+        </div>
+        <div class="toolbar-row toolbar-more">
+          <button type="button" class="btn btn-tool" id="btn-summarize" title="Summarize text">
+            <span class="btn-icon">◐</span> Summarize
+          </button>
+          <button type="button" class="btn btn-tool" id="btn-expand" title="Expand into more detail">
+            <span class="btn-icon">⊕</span> Expand
+          </button>
+          <button type="button" class="btn btn-tool" id="btn-bullets" title="Convert to/from bullet points">
+            <span class="btn-icon">•</span> Bullets
+          </button>
+          <button type="button" class="btn btn-tool" id="btn-simplify" title="Simplify language">
+            <span class="btn-icon">◇</span> Simplify
+          </button>
+        </div>
+      </div>
+
+      <main class="editor-container">
+        <textarea
+          id="editor"
+          class="editor"
+          placeholder="Start typing here... Try a sentence and hit Complete, or paste a draft to refine with Rewrite or Fix Grammar."
+          spellcheck="true"
+          autofocus
+        ></textarea>
+        <div id="suggestion" class="suggestion hidden"></div>
+      </main>
+
+      <footer class="footer">
+        <span id="status" class="status">Ready</span>
+        <span id="char-count" class="char-count">0 characters</span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
