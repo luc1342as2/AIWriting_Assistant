@@ -45,8 +45,12 @@ function getSelectionOrFull() {
   return { text: editor.value, start: 0, end: editor.value.length };
 }
 
+function apiBase() {
+  return (window.API_BASE || "").replace(/\/$/, "");
+}
+
 async function api(method, body) {
-  const res = await fetch(`/api/${method}`, {
+  const res = await fetch(`${apiBase()}/api/${method}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -207,7 +211,7 @@ function initPricingButtons() {
       btn.disabled = true;
       btn.textContent = "Loading...";
       try {
-        const res = await fetch("/api/create-checkout-session", {
+        const res = await fetch(`${apiBase()}/api/create-checkout-session`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ plan }),
